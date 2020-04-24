@@ -166,7 +166,7 @@ module Rack
           milliseconds ||= (Process.clock_gettime(Process::CLOCK_MONOTONIC) - @start) * 1000
           self[:duration_milliseconds]                  = milliseconds
           self[:is_trivial]                             = true if milliseconds < self[:trivial_duration_threshold_milliseconds]
-          self[:duration_without_children_milliseconds] = milliseconds - self[:children].sum(&:duration_ms)
+          self[:duration_without_children_milliseconds] = milliseconds - self[:children].sum(&:duration_ms).to_f
         end
 
         def adjust_depth
